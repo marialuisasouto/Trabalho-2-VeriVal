@@ -8,7 +8,6 @@ public class EmprestimoDTO {
     private int nroParcelas;
     private double valorTotal;
     private double valorParcela;
-    
     public EmprestimoDTO(boolean segurado, boolean jurosCompostos, double valor, double taxa, int nroParcelas,
             double valorTotal, double valorParcela) {
         this.segurado = segurado;
