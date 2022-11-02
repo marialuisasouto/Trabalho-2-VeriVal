@@ -7,7 +7,7 @@ public class Emprestimo {
     private double valor;
     private double taxa;
     private int nroParcelas;
-    private CalculoDeJurosTest calculoDeJuros;
+    private CalculoDeJuros calculoDeJuros;
 
     private Emprestimo(Builder builder) {
         this.segurado = builder.segurado;
@@ -18,55 +18,55 @@ public class Emprestimo {
         this.calculoDeJuros = builder.calculoDeJuros;
     }
 
-    public static class Builder {
+    public static class Builder{
         private boolean segurado = true;
         private boolean jurosCompostos = true;
         private double valor = 1000.0;
         private double taxa = 0.035;
         private int nroParcelas = 5;
-        private CalculoDeJurosTest calculoDeJuros = null;
+        private CalculoDeJuros calculoDeJuros = null;
 
-        public Builder(CalculoDeJurosTest calc) {
+        public Builder(CalculoDeJuros calc){
             calculoDeJuros = calc;
         }
 
-        public Builder comSeguro() {
+        public Builder comSeguro(){
             segurado = true;
             return this;
         }
 
-        public Builder semSeguro() {
+        public Builder semSeguro(){
             segurado = false;
             return this;
         }
 
-        public Builder jurosCompostos() {
+        public Builder jurosCompostos(){
             jurosCompostos = true;
             return this;
         }
-
-        public Builder jurosSimples() {
+    
+        public Builder jurosSimples(){
             jurosCompostos = false;
             return this;
         }
 
-        public Builder valor(double valorEmp) {
+        public Builder valor(double valorEmp){
             valor = valorEmp;
             return this;
         }
 
-        public Builder taxa(double txEmp) {
+        public Builder taxa(double txEmp){
             taxa = txEmp;
             return this;
         }
 
-        public Builder parcelas(int nroPar) {
+        public Builder parcelas(int nroPar){
             nroParcelas = nroPar;
             return this;
         }
 
-        public EmprestimoTest build() {
-            return new EmprestimoTest(this);
+        public Emprestimo build(){
+            return new Emprestimo(this);
         }
     }
 
@@ -93,15 +93,13 @@ public class Emprestimo {
     public double custoTotal() {
         double valorIof = valor * IOF;
         if (this.isJurosCompostos()) {
-            return valor + valorIof
-                    + calculoDeJuros.jurosEmprestimoJurosCompostos(getValor(), getTaxa(), getNroParcelas());
-        } else {
-            return valor + valorIof
-                    + calculoDeJuros.jurosEmprestimoJurosSimples(getValor(), getTaxa(), getNroParcelas());
+            return valor + valorIof + calculoDeJuros.jurosEmprestimoJurosCompostos(getValor(), getTaxa(), getNroParcelas());
+        }else{
+            return valor + valorIof + calculoDeJuros.jurosEmprestimoJurosSimples(getValor(), getTaxa(), getNroParcelas());
         }
     }
 
-    public double valorParcela() {
-        return custoTotal() / getNroParcelas();
+    public double valorParcela(){
+        return custoTotal()/getNroParcelas();
     }
 }

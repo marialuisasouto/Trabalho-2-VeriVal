@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/emprestimo")
 public class EmprestimoController {
-
-    public EmprestimoController() {
+    
+    public EmprestimoController(){
     }
 
     @GetMapping("/jurosSimples")
@@ -18,24 +18,24 @@ public class EmprestimoController {
     public EmprestimoDTO emprestimoJurosSimples(
             @RequestParam final Double valor,
             @RequestParam final Integer parcelas,
-            @RequestParam final Double taxa) {
-
-        CalculoDeJurosTest calcJuros = new CalculoDeJurosTest();
-        EmprestimoTest emprestimo = new EmprestimoTest.Builder(calcJuros)
-                .valor(valor)
-                .taxa(taxa)
-                .parcelas(parcelas)
-                .jurosSimples()
-                .build();
-        double valorParcela = emprestimo.custoTotal() / emprestimo.getNroParcelas();
+            @RequestParam final Double taxa){
+        
+        CalculoDeJuros calcJuros = new CalculoDeJuros();
+        Emprestimo emprestimo = new Emprestimo.Builder(calcJuros)
+                                    .valor(valor)
+                                    .taxa(taxa)
+                                    .parcelas(parcelas)
+                                    .jurosSimples()
+                                    .build();
+        double valorParcela = emprestimo.custoTotal()/emprestimo.getNroParcelas();
         EmprestimoDTO resp = new EmprestimoDTO(
-                emprestimo.isSegurado(),
-                emprestimo.isJurosCompostos(),
-                emprestimo.getValor(),
-                emprestimo.getTaxa(),
-                emprestimo.getNroParcelas(),
-                emprestimo.custoTotal(),
-                valorParcela);
+                                    emprestimo.isSegurado(),
+                                    emprestimo.isJurosCompostos(), 
+                                    emprestimo.getValor(),
+                                    emprestimo.getTaxa(),
+                                    emprestimo.getNroParcelas(),
+                                    emprestimo.custoTotal(),
+                                    valorParcela);
         return resp;
     }
 
@@ -44,24 +44,25 @@ public class EmprestimoController {
     public EmprestimoDTO emprestimoJurosCompostos(
             @RequestParam final Double valor,
             @RequestParam final Integer parcelas,
-            @RequestParam final Double taxa) {
-
-        CalculoDeJurosTest calcJuros = new CalculoDeJurosTest();
-        EmprestimoTest emprestimo = new EmprestimoTest.Builder(calcJuros)
-                .valor(valor)
-                .taxa(taxa)
-                .parcelas(parcelas)
-                .jurosCompostos()
-                .build();
-        double valorParcela = emprestimo.custoTotal() / emprestimo.getNroParcelas();
+            @RequestParam final Double taxa){
+        
+        CalculoDeJuros calcJuros = new CalculoDeJuros();
+        Emprestimo emprestimo = new Emprestimo.Builder(calcJuros)
+                                    .valor(valor)
+                                    .taxa(taxa)
+                                    .parcelas(parcelas)
+                                    .jurosCompostos()
+                                    .build();
+        double valorParcela = emprestimo.custoTotal()/emprestimo.getNroParcelas();
         EmprestimoDTO resp = new EmprestimoDTO(
-                emprestimo.isSegurado(),
-                emprestimo.isJurosCompostos(),
-                emprestimo.getValor(),
-                emprestimo.getTaxa(),
-                emprestimo.getNroParcelas(),
-                emprestimo.custoTotal(),
-                valorParcela);
+                                    emprestimo.isSegurado(),
+                                    emprestimo.isJurosCompostos(), 
+                                    emprestimo.getValor(),
+                                    emprestimo.getTaxa(),
+                                    emprestimo.getNroParcelas(),
+                                    emprestimo.custoTotal(),
+                                    valorParcela);
         return resp;
     }
 }
+

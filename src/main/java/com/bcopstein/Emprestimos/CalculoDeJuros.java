@@ -18,11 +18,11 @@ public class CalculoDeJuros {
         return this.comSeguro;
     }
 
-    public void setTaxaSeguro(double taxa) {
+    public void setTaxaSeguro(double taxa){
         txSeguro = taxa;
     }
 
-    public double getTaxaSeguro() {
+    public double getTaxaSeguro(){
         return txSeguro;
     }
 
@@ -36,7 +36,7 @@ public class CalculoDeJuros {
 
     public double jurosEmprestimoJurosCompostos(double valor, double taxa, int nroParcelas) {
         double tx = taxa;
-        if (comSeguro) {
+        if (comSeguro){
             tx += txSeguro;
         }
         double valorAcum = valor;
